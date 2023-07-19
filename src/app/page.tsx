@@ -1,6 +1,4 @@
 "use client"; // This is a client component 👈🏽
-// import axios from 'axios'
-// import { useEffect, useState } from 'react'
 import {FaGithub, FaLinkedin, FaYoutube} from "react-icons/fa"
 import Header from '@/patterns/Header';
 import Footer from '@/patterns/Footer';
@@ -15,19 +13,6 @@ type Users = {
 
 
 export default function Home() {
-  
-  // const baseURL = 'https://api.github.com/users/'
-  // const [user, setUser] = useState<Users | null>(null)
-  
-  // useEffect(()=>{
-  //   axios
-  //   .get(`${baseURL}jonatanmds`)
-  //   .then((response)=>setUser(response.data))
-  //   .catch((err)=>{
-  //     console.log("ops! ocorreu um erro"+err)
-  //   })
-  // },[])
-
   return (
     <main className="w-full flex flex-col justify-between min-h-screen items-center gap-28 px-20">
       <Header />
