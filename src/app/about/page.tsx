@@ -7,9 +7,9 @@ export default function About(){
   return(
     <div className="w-full h-[100vh] flex flex-col justify-between md:px-20">
         <Header />
-        <div className="px-6 md:px-0">
+        <main className="px-6 md:px-0">
           <h1 className='text-center text-2xl md:text-4xl'>Sobre</h1>
-          <div className='flex flex-col md:flex-row gap-8 justify-center items-center'>
+          <section className='flex flex-col md:flex-row gap-8 justify-center items-center'>
             <div className="flex flex-col justify-center items-center gap-4">
             <Image
               className='rounded'
@@ -38,8 +38,8 @@ export default function About(){
             </li>
           </ul>
           </div>
-          </div>
-        </div>
+          </section>
+        </main>
         <Footer />
       </div>
   )

@@ -1,5 +1,5 @@
 "use client"; // This is a client component 👈🏽
-import {FaGithub, FaLinkedin, FaYoutube} from "react-icons/fa"
+import {FaGithub, FaLinkedin} from "react-icons/fa"
 import Header from '@/patterns/Header';
 import Footer from '@/patterns/Footer';
 
@@ -14,9 +14,9 @@ type Users = {
 
 export default function Home() {
   return (
-    <main className="w-full flex flex-col justify-between min-h-screen items-center gap-28 md:px-20">
+    <div className="w-full flex flex-col justify-between min-h-screen items-center gap-28 md:px-20">
       <Header />
-      <div className='flex flex-col gap-4 px-6 md:px-0'>
+      <main className='flex flex-col gap-4 px-6 md:px-0'>
           <h1 className='text-base md:text-5xl'>Jonatan Marques</h1>
         <div>
           <p>Front-End Developer</p>
@@ -34,9 +34,9 @@ export default function Home() {
             </a>
           </li>
         </ul>
-      </div>
+      </main>
       <Footer />
-    </main>
+    </div>
   )
 }
 
