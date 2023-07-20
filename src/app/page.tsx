@@ -14,9 +14,9 @@ type Users = {
 
 export default function Home() {
   return (
-    <main className="w-full flex flex-col justify-between min-h-screen items-center gap-28 px-20">
+    <main className="w-full flex flex-col justify-between min-h-screen items-center gap-28 md:px-20">
       <Header />
-      <div className='flex flex-col gap-4'>
+      <div className='flex flex-col gap-4 px-6 md:px-0'>
           <h1 className='text-base md:text-5xl'>Jonatan Marques</h1>
         <div>
           <p>Front-End Developer</p>

@@ -11,7 +11,7 @@ export default function Button({nameLabel, onClick, hasActions = false}:Label){
   return(
     <button onClick={onClick} className='text-white border-solid border border-white p-2 rounded-lg hover:bg-[#363636]'>
       {hasActions?(
-        <a className="w-full p-6" href={urlToDownloadCv}>{nameLabel}</a>
+        <a className="w-full md:px-6" href={urlToDownloadCv}>{nameLabel}</a>
       ):nameLabel}
     </button>
   )
