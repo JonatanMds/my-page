@@ -49,7 +49,7 @@ export default function Form(){
     <div className="w-full flex flex-col md:flex-row md:justify-between items-center gap-6 px-[24px] lg:items-start md:px-[0px]">
       {success ? 
       <div className='w-full flex flex-col items-center'>
-        <p className='w-full text-center'>Obrigado por entrar em contato, retornarei o quanto antes possível</p>
+        <p className='w-full text-center'>Obrigado por entrar em contato, retornarei o mais breve possível</p>
         <Lottie animationData={sucess} loop={false} width={40} style={{ height: '200px', width: '200px'}} />
       </div> 
       :
