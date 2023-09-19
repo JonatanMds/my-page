@@ -2,17 +2,43 @@
 import {FaGithub, FaLinkedin} from "react-icons/fa"
 import Header from '@/patterns/Header';
 import Footer from '@/patterns/Footer';
+import { useState, useEffect } from "react";
+import axios from 'axios'
+import Hobbies from "@/patterns/Hobbies";
+import Form from "@/patterns/Form";
 
 
 type Users = {
-  login: string,
-  name: string,
-  avatar_url: string,
   id: string;
+  main: string
+  description: string
+  weather: string
+  cod: string
 }
 
 
 export default function Home() {
+
+  const [info, setInfo] = useState<Users>()
+  const chaveApi = '75cd523398152201e9e42dd3a0711bb5'
+  const cidade = 'rio de janeiro'
+  const linkApi = `https://api.openweathermap.org/data/2.5/weather?q=${cidade}&appid=${chaveApi}&lang=pt_br`
+  // https://api.openweathermap.org/data/2.5/weather?q={cidade}&appid={API_KEY}&lang=pt_br
+
+
+  // useEffect(()=>{
+  //   axios.get(linkApi)
+  //   .then(response=>{
+  //     setInfo(response.data)
+  //   })
+  // },[])
+
+  // // const [weatheraa, setWeatheraa] = useState<Weather>()
+
+  // const recebe = {...info}
+  // const weatherInfos =  recebe?.weather![0]
+  // console.log(weatherInfos)
+
   return (
     <div className="w-full flex flex-col justify-between min-h-screen items-center gap-28 md:px-20">
       <Header />
@@ -35,6 +61,8 @@ export default function Home() {
           </li>
         </ul>
       </main>
+      {/* <Hobbies /> */}
+      <Form />
       <Footer />
     </div>
   )
