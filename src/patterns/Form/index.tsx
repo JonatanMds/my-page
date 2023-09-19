@@ -2,6 +2,10 @@ import {useForm} from 'react-hook-form'
 import {z} from 'zod'
 import {zodResolver} from '@hookform/resolvers/zod'
 import emailjs from '@emailjs/browser'
+import { useState } from 'react'
+import Lottie from "lottie-react";
+import sucess from '../../../public/sucess.json'
+
 
 const createUserFormSchema = z.object({
   empresa: z.string().nonempty('Campo empresa obrigatório'),
@@ -13,6 +17,9 @@ type CreateUserFormData = z.infer<typeof createUserFormSchema>
 
 export default function Form(){
 
+  
+  const [success, setSuccess] = useState(false)
+  
   const {register, handleSubmit, formState: {errors}, watch, reset} = useForm<CreateUserFormData>({
     resolver: zodResolver(createUserFormSchema)
   })
@@ -32,7 +39,7 @@ export default function Form(){
     emailjs.send('service_g8071zl','template_0zimj26',templateParams,'m2paKAZL1VUQui6aR')
     .then((response)=>{
       reset(undefined , {keepValues: false})
-      console.log('Email enviado', response.status, response.text)
+      setSuccess(true)
     },(err)=>{
       console.log("Erro:", err)
     })
@@ -40,48 +47,57 @@ export default function Form(){
 
   return(
     <div className="w-full flex flex-col md:flex-row md:justify-between items-center gap-6 px-[24px] lg:items-start md:px-[0px]">
-      <section className="flex flex-col md:items-start text-base text-center md:text-start md:text-lg lg:text-xl">
-        <h1>Fale comigo</h1>
-        <p>Ficou interessado em meus trabalhos? entre em contato !</p>
-      </section>
-      <form onSubmit={handleSubmit(emailSend)}>
-        <fieldset className="flex flex-col md:w-[20vw] text-sm lg:text-base">
-          {/* <legend className="mb-6">Entre em contato</legend> */}
-          <div className="flex flex-col">
-            <label className="mb-2">Empresa</label>
+      {success ? 
+      <div className='w-full flex flex-col items-center'>
+        <p className='w-full text-center'>Obrigado por entrar em contato, retornarei o quanto antes possível</p>
+        <Lottie animationData={sucess} loop={false} width={40} style={{ height: '200px', width: '200px'}} />
+      </div> 
+      :
+      <>
+        <section className="flex flex-col md:items-start text-base text-center md:text-start md:text-lg lg:text-xl">
+          <h1>Fale comigo</h1>
+          <p>Ficou interessado em meus trabalhos? entre em contato !</p>
+        </section>
+        <form onSubmit={handleSubmit(emailSend)}>
+          <fieldset className="flex flex-col md:w-[20vw] text-sm lg:text-base">
+            {/* <legend className="mb-6">Entre em contato</legend> */}
+            <div className="flex flex-col">
+              <label className="mb-2">Empresa</label>
+              <input 
+                className="rounded p-2 text-[#000]"
+                type="text" 
+                placeholder="Nome/Empresa"
+                {...register('empresa')}
+              >
+              </input>
+              {errors.empresa && <p className='text-[#ba184f] text-xs mt-1'>{errors.empresa.message}</p>}
+            </div>
+            <div className="flex flex-col">
+            <label className="my-2">Email</label>
             <input 
               className="rounded p-2 text-[#000]"
-              type="text" 
-              placeholder="Nome/Empresa"
-              {...register('empresa')}
+              type="email" 
+              placeholder="Email"
+              {...register('email')}
             >
             </input>
-            {errors.empresa && <p className='text-[#ba184f] text-xs mt-1'>{errors.empresa.message}</p>}
-          </div>
-          <div className="flex flex-col">
-          <label className="my-2">Email</label>
-          <input 
-            className="rounded p-2 text-[#000]"
-            type="email" 
-            placeholder="Email"
-            {...register('email')}
-          >
-          </input>
-          {errors.email && <p className='text-[#ba184f] text-xs mt-1'>{errors.email.message}</p>}
-          </div>
-          <div className="flex flex-col">
-          <label className="my-2">Assunto</label>
-          <textarea
-            className="rounded p-2 text-[#000]"
-            placeholder="Assunto"
-            {...register('assunto')}
-          >
-          </textarea>
-          {errors.assunto && <p className='text-[#ba184f] text-xs mt-1'>{errors.assunto.message}</p>}
-          </div>
-        </fieldset>
-        <button className="w-full p-2 bg-[#1e2021] rounded mt-4 hover:bg-white hover:text-[#000]" type='submit'>Enviar</button>
-      </form>
+            {errors.email && <p className='text-[#ba184f] text-xs mt-1'>{errors.email.message}</p>}
+            </div>
+            <div className="flex flex-col">
+            <label className="my-2">Assunto</label>
+            <textarea
+              className="rounded p-2 text-[#000]"
+              placeholder="Assunto"
+              {...register('assunto')}
+            >
+            </textarea>
+            {errors.assunto && <p className='text-[#ba184f] text-xs mt-1'>{errors.assunto.message}</p>}
+            </div>
+          </fieldset>
+          <button className="w-full p-2 bg-[#1e2021] rounded mt-4 hover:bg-white hover:text-[#000]" type='submit'>Enviar</button>
+        </form>
+      </>
+      }
     </div>
   )
 }
